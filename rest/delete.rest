@@ -1,0 +1,7 @@
+
+### Delete Customer by ID  non existing
+DELETE http://localhost:80/api/v1/customers/8e051e93-6d98-403c-b2ff-d8b03d9826c9
+
+### Delete Customer by ID  
+DELETE http://localhost:80/api/v1/customers/8e051e93-6d98-403c-b2ff-d8b03d982
+

@@ -1,0 +1,25 @@
+
+### Get all Customer list
+GET http://localhost:80/api/v1/customers
+
+
+### Get customers with Data Plan Basic
+GET http://localhost:80/api/v1/customers/data-plan/basic
+
+
+### Get customers with Data Plan Standar
+GET http://localhost:80/api/v1/customers/data-plan/standar
+
+
+### ### Get customers with Data Plan Premium
+GET http://localhost:80/api/v1/customers/data-plan/premium
+
+
+### Get Customer by ID  
+GET http://localhost:80/api/v1/customers/8e051e93-6d98-403c-b2ff-d8b03d9826c9
+
+### Get Customer by ID  
+GET http://localhost:80/api/v1/customers/b5d45027-7c9c-49f0-9f87-25a7dd32729d
+
+### Get Customer by ID  non existing
+GET http://localhost:80/api/v1/customers/b5d45027-7c9c-49f0-9f87-25a7d111111

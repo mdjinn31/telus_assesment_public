@@ -1,0 +1,224 @@
+openapi: 3.0.0
+info:
+  title: My assessment for Telus
+  description: RESTful API that allows managing customer cellphone data usage, with endpoints for creating, reading, updating, and deleting records
+  version: 1.0.0
+servers:
+  - url: http://localhost:80/api/v1
+    description: Telus assessment telephone customer Api
+
+paths:
+  /customers:
+    get:
+      summary: Get all customers
+      responses:
+        '200':
+          description: List of all customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+    post:
+      summary: Create a new customer
+      requestBody:
+        description: Customer to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        '201':
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Customer created successfully"
+
+  /customers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: "8e051e93-6d98-403c-b2ff-d8b03d9826c9"
+    get:
+      summary: Get a customer by ID
+      responses:
+        '200':
+          description: Customer details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Customer not found
+    delete:
+      summary: Delete a customer by ID
+      responses:
+        '200':
+          description: Customer deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Customer deleted successfully"
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Customer not found
+
+  /customers/data-plan/{plan}:
+    parameters:
+      - name: plan
+        in: path
+        required: true
+        schema:
+          type: string
+          enum: [basic, standard, premium]
+          example: "premium"
+    get:
+      summary: Get customers by data plan
+      responses:
+        '200':
+          description: List of customers with the specified data plan
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '400':
+          description: Invalid plan supplied
+
+  /customers/{id}/data-plan:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: "8e051e93-6d98-403c-b2ff-d8b03d9826c9"
+      - name: data_plan
+        in: query
+        required: true
+        schema:
+          type: string
+          enum: [basic, standard, premium]
+          example: "premium"
+    put:
+      summary: Update customer data plan
+      requestBody:
+        description: Data plan to update
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data_plan:
+                  type: string
+                  enum: [basic, standard, premium]
+                  example: "premium"
+        required: true
+      responses:
+        '200':
+          description: Data plan updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Data plan updated successfully"
+        '400':
+          description: Invalid ID or data plan supplied
+
+  /customers/{id}/data-usage:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: "8e051e93-6d98-403c-b2ff-d8b03d9826c9"
+      - name: data_used
+        in: query
+        required: true
+        schema:
+          type: integer
+          example: 100
+    put:
+      summary: Update customer data usage
+      requestBody:
+        description: Data usage to update
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data_used:
+                  type: integer
+                  example: 100
+        required: true
+      responses:
+        '200':
+          description: Data usage updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Data usage updated successfully"
+        '400':
+          description: Invalid ID or data usage supplied
+
+components:
+  schemas:
+    Customer:
+      type: object
+      required:
+        - id
+        - name
+        - phone_number
+        - data_plan
+        - data_used
+        - billing_cycle
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "8e051e93-6d98-403c-b2ff-d8b03d9826c9"
+        name:
+          type: string
+          example: "John Doe"
+        phone_number:
+          type: string
+          example: "502-1234-56789"
+        data_plan:
+          type: string
+          enum: [basic, standard, premium]
+          example: "basic"
+        data_used:
+          type: integer
+          example: 100
+        billing_cycle:
+          type: string
+          example: "monthly"

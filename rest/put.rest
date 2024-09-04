@@ -1,0 +1,79 @@
+
+###Update Customers Data Plan
+PUT http://localhost:80/api/v1/customers/9c865bc7-b2aa-4772-b828-03b6c6265640/data-plan HTTP/1.1
+content-type: application/json
+
+{
+    "data_plan": "premium"
+}
+
+
+###Update Customers Data Plan
+PUT http://localhost:80/api/v1/customers/b5d45027-7c9c-49f0-9f87-25a7dd32729d/data-plan HTTP/1.1
+content-type: application/json
+
+{
+    "data_plan": "basic"
+}
+
+
+###Update Customers Data Plan
+PUT http://localhost:80/api/v1/customers/acb1e2f6-a1e9-46f4-a4d1-fc7c59c4c576/data-plan HTTP/1.1
+content-type: application/json
+
+{
+    "data_plan": "basic"
+}
+
+
+###Update Customers Data Plan non existent
+PUT http://localhost:80/api/v1/customers/8e051e93-6d98-403c-b2ff-d8b03d98654564/data-plan HTTP/1.1
+content-type: application/json
+
+{
+    "data_used": 75
+}
+
+
+###Update Customers Data usage
+PUT http://localhost:80/api/v1/customers/8e051e93-6d98-403c-b2ff-d8b03d9826c9/data-usage HTTP/1.1
+content-type: application/json
+
+{
+    "data_used": 75
+}
+
+
+###Update Customers Data usage
+PUT http://localhost:80/api/v1/customers/8e051e93-6d98-403c-b2ff-werwerwer324/data-usage HTTP/1.1
+content-type: application/json
+
+{
+    "data_used": 75
+}
+
+###Update Customers Data usage
+PUT http://localhost:80/api/v1/customers/9c865bc7-b2aa-4772-b828-03b6c6265640/data-usage HTTP/1.1
+content-type: application/json
+
+{
+    "data_used": 175
+}
+
+
+###Update Customers Data usage
+PUT http://localhost:80/api/v1/customers/b5d45027-7c9c-49f0-9f87-25a7dd32729d/data-usage HTTP/1.1
+content-type: application/json
+
+{
+    "data_used": 100
+}
+
+
+###Update Customers Data usage
+PUT http://localhost:80/api/v1/customers/acb1e2f6-a1e9-46f4-a4d1-fc7c59c4c576/data-usage HTTP/1.1
+content-type: application/json
+
+{
+    "data_used": 200
+}

@@ -1,0 +1,32 @@
+###Post new Customer ( Juan Toro) Basic Plan
+POST http://localhost:80/api/v1/customers HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Juan Toro",
+    "phone_number": "502-1234-00639",
+    "data_plan": "premium",
+    "billing_cycle": "28"
+}
+
+###Post new Customer ( Robhert Plant)
+POST http://localhost:80/api/v1/customers HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Robert Plant",
+    "phone_number": "507-9854-06669",
+    "data_plan": "standar",
+    "billing_cycle": "18"
+}
+
+###Post new Customer ( Himmy Page)
+POST http://localhost:80/api/v1/customers HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Jimmy Page",
+    "phone_number": "001-6865-987654",
+    "data_plan": "basic",
+    "billing_cycle": "30"
+}
