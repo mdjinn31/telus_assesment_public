@@ -11,6 +11,10 @@ describe('Customer Routes', () => {
     server.listen(); 
   });
 
+  afterAll(() =>{
+    console.log("End of all")
+  })  
+
 
   describe('GET /api/v1/customers', () => {
     it('should return all customers', async () => {
