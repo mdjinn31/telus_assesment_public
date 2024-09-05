@@ -43,7 +43,7 @@ describe('Customer Routes', () => {
       ]      
       const response = await request.get('/api/v1/customers');
       expect(response.status).toBe(200);
-      expect(response.body).toEqual(expect.any(allCustomerArray)); 
+      expect(response.body).toEqual(allCustomerArray); 
     });
   });
 
@@ -52,7 +52,7 @@ describe('Customer Routes', () => {
       const customerId = '8e051e93-6d98-403c-b2ff-d8b03d9826c9';
       const response = await request.get(`/api/v1/customers/${customerId}`);
       expect(response.status).toBe(200);
-      expect(response.body).toHaveProperty('id', customerId);
+      expect(response.body[0]).toHaveProperty('id', customerId);
     });
 
     it('should return 400 for invalid ID', async () => {
@@ -83,18 +83,18 @@ describe('Customer Routes', () => {
     it('should return customers by data plan', async () => {
       const dataPlanArray = [
         {
-          "id": "8e051e93-6d98-403c-b2ff-d8b03d9826c9",
-          "name": "John Doe",
-          "phone_number": "502-1234-56789",
-          "data_plan": "premium",
+          "id": 'b5d45027-7c9c-49f0-9f87-25a7dd32729d',
+          "name": 'Tommy Boy',
+          "phone_number": '503-4321-98745',
+          "data_plan": 'standar',
           "data_used": 0,
-          "billing_cycle": "28"
+          "billing_cycle": '20'
         }
       ]
       
-      const response = await request.get('/api/v1/customers/data-plan/premium');
+      const response = await request.get('/api/v1/customers/data-plan/standar');
       expect(response.status).toBe(200);
-      expect(response.body).toEqual(expect.any(dataPlanArray)); // Adjust based on your mock data
+      expect(response.body).toEqual(dataPlanArray); 
     });
 
     it('should return 400 for invalid data plan', async () => {
@@ -106,7 +106,7 @@ describe('Customer Routes', () => {
 
   describe('PUT /api/v1/customers/:id/data-plan', () => {
     it(`should update a customer's data plan`, async () => {
-      const customerId = '8e051e93-6d98-403c-b2ff-d8b03d9826c9'; 
+      const customerId = '9c865bc7-b2aa-4772-b828-03b6c6265640'; 
       const response = await request.put(`/api/v1/customers/${customerId}/data-plan`)
         .send({ data_plan: 'premium' });
       expect(response.status).toBe(200);
@@ -131,8 +131,8 @@ describe('Customer Routes', () => {
   });
 
   describe('PUT /api/v1/customers/:id/data-usage', () => {
-    it('should update a customer\'s data usage', async () => {
-      const customerId = '8e051e93-6d98-403c-b2ff-d8b03d9826c9';
+    it(`should update a customer's data usage`, async () => {
+      const customerId = 'b5d45027-7c9c-49f0-9f87-25a7dd32729d';
       const response = await request.put(`/api/v1/customers/${customerId}/data-usage`)
         .send({ data_used: 100 });
       expect(response.status).toBe(200);

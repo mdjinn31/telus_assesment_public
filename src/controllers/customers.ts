@@ -70,9 +70,9 @@ export const deleteCustomer = async(req : Request, res : Response) => {
 export const updateCustomerPlan = async(req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { data_plan, ...rest} = req.body;
+        const { data_plan } = req.body;
         const customerIndex: number = mockDB.findIndex((customer: CustomerI) => customer.id === id);
-        if(customerIndex === -1) return res.status(400).json({message: 'Customer does not exists.'});        
+        if(customerIndex === -1) return res.status(400).json({error:{message: 'Customer does not exists.'}});        
         logging.info('----------------------------------------');
         logging.info(`Updateing Customer ${id} from ${mockDB[customerIndex].data_plan} to ${data_plan}`);
         mockDB[customerIndex].updateDataPlan(data_plan);
@@ -89,9 +89,10 @@ export const updateCustomerPlan = async(req: Request, res: Response) => {
 export const updateCustomerUsage = async(req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { data_used, ...rest} = req.body;
+        const { data_used } = req.body;
+        if(data_used <= 0) return res.status(400).json({errors:{message: 'Customer data uses must be grater than 0'}});        
         const customerIndex: number = mockDB.findIndex((customer: CustomerI) => customer.id === id);
-        if(customerIndex === -1) return res.status(400).json({message: 'Customer does not exists.'});        
+        if(customerIndex === -1) return res.status(400).json({errors:{message: 'Customer does not exists.'}});        
         mockDB[customerIndex].updateDataUsed(data_used);
         logging.info('----------------------------------------');
         logging.info(`Updateing ${data_used} MB data usage to Customer ${id}`);
@@ -114,7 +115,7 @@ export const createCustomer = async(req: Request, res: Response) => {
         logging.info(`New Customer created ${newCustomer.id}`);
         logging.info(newCustomer);
         logging.info('----------------------------------------');        
-        res.json({message: "Customer created successfully"});
+        res.status(201).json({message: "Customer created successfully"});
     } catch (error:any) {
         logging.error(`Error ${ error}`);
         res.status(400).json({errors: `Error ${error}`});        
